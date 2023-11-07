@@ -1,0 +1,13 @@
+For me on ubuntu:
+Something like this:
+
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install --latest-npm
+npm i -g pm2
+
+npm run build
+pm2 kill
+pm2 start --name=YOUR_WEBSITE_NAME_HERE npm -- start
+
+helpful when your pm2 inevitably crashes:
+pm2 log --lines 1000
