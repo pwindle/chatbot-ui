@@ -22,7 +22,7 @@ export const fallbackModelID = OpenAIModelID.GPT_3_5;
 export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
   [OpenAIModelID.GPT_3_5]: {
     id: OpenAIModelID.GPT_3_5,
-    name: 'GPT-3.5-TURBO',
+    name: 'GPT-3.5',
     maxLength: 12000,
     tokenLimit: 4000,
   },
@@ -53,7 +53,7 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
   [OpenAIModelID.GPT_4_TURBO]: { // This is only a preview and will be replaced in the coming weeks (2023-11-07). Source: https://openai.com/blog/new-models-and-developer-products-announced-at-devday#gpt-4-turbo-with-128k-context
     id: OpenAIModelID.GPT_4_TURBO,
     name: 'GPT-4-TURBO',
-    maxLength: 380000,
+    maxLength: 384000,
     tokenLimit: 128000,
   },
 };
