@@ -32,7 +32,7 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     maxLength: 12000,
     tokenLimit: 4000,
   },
-  [OpenAIModelID.GPT_3_5_PREVIEW]: { // Remove this after 2023-12-11. Source https://openai.com/blog/new-models-and-developer-products-announced-at-devday#updated-gpt-3-5-turbo
+  [OpenAIModelID.GPT_3_5_PREVIEW]: { // Remove this when  production ready version comes out. Source https://openai.com/blog/new-models-and-developer-products-announced-at-devday#updated-gpt-3-5-turbo
     id: OpenAIModelID.GPT_3_5_PREVIEW,
     name: 'GPT-3.5-TURBO-preview',
     maxLength: 12000,
