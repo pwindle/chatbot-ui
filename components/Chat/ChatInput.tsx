@@ -6,6 +6,7 @@ import {
   IconPlayerStop,
   IconRepeat,
   IconSend,
+  IconTrash,
 } from '@tabler/icons-react';
 import {
   KeyboardEvent,
@@ -79,16 +80,28 @@ export const ChatInput = ({
     }
   };
 
-  const ImagePreview = ({ images }: { images: string[] }) => {
+  const handleRemoveImage = (index: number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
+  const ImagePreview = ({ images, onRemoveImage }: { images: string[]; onRemoveImage: (index: number) => void }) => {
     return (
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="relative flex flex-wrap gap-2">
         {images.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`uploaded-${index}`}
-            className="w-20 h-20 object-cover rounded-md border"
-          />
+          <div key={index} className="relative">
+            <img
+              src={image}
+              alt={`uploaded-${index}`}
+              className="w-20 h-20 object-cover mt-3 mb-3 ml-3 rounded-md"
+            />
+            <IconTrash
+              className="absolute top-0 right-0 w-5 h-5 p-0 border-solid border border-1 dark:text-neutral-400 dark:hover:text-neutral-100 border-neutral-600 bg-white dark:bg-neutral-800 dark:border-neutral-800 dark:hover:bg-neutral-600 dark:text-white rounded-md text-neutral-700 hover:bg-red-100 cursor-pointer"
+              size={18}
+              onClick={() => 
+                onRemoveImage(index)
+              }
+            />
+          </div>
         ))}
       </div>
     );
@@ -321,7 +334,7 @@ export const ChatInput = ({
           )}
 
         <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
-          <ImagePreview images={images} />
+          <ImagePreview images={images} onRemoveImage={handleRemoveImage} />
 
 
 
