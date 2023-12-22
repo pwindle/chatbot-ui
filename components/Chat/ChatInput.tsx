@@ -135,31 +135,41 @@ export const ChatInput = ({
     updatePromptListVisibility(value);
   };
 
-  const handleSend = () => {
-    if (messageIsStreaming) {
-      return;
-    }
+const handleSend = () => {
+  if (messageIsStreaming) {
+    return;
+  }
 
-    if (!content) {
-      alert(t('Please enter a message'));
-      return;
-    }
+  const hasContent = content && content.trim() !== '';
+  const hasImages = images.length > 0;
 
-    var messageContent:Content[] = [{"type": "text", "text": content}];
-    if(images && images.length >0){
-      var imageMessages = images.map(image => { return {type: "image_url", image_url:{"url": image}}});
-      messageContent = [...messageContent, ...imageMessages]
-    }
+  if (!hasContent && !hasImages) {
+    alert(t('Please enter a message'));
+    return;
+  }
 
-    onSend({ role: 'user', content:messageContent }, plugin);
-    setImages([]);
-    setContent('');
-    setPlugin(null);
+  const messageContent: Content[] = [];
 
-    if (window.innerWidth < 640 && textareaRef && textareaRef.current) {
-      textareaRef.current.blur();
-    }
-  };
+  if (hasContent) {
+    messageContent.push({ type: 'text', text: content });
+  }
+
+  if (hasImages) {
+    const imageMessages = images.map((image) => ({
+      type: 'image_url',
+      image_url: { url: image },
+    }));
+    messageContent.push(...imageMessages);
+  }
+
+  onSend({ role: 'user', content: messageContent }, plugin);
+  setImages([]);
+  setContent('');
+
+  if (window.innerWidth < 640 && textareaRef && textareaRef.current) {
+    textareaRef.current.blur();
+  }
+};
 
   const handleStopConversation = () => {
     stopConversationRef.current = true;
@@ -277,6 +287,43 @@ export const ChatInput = ({
       textareaRef.current.focus();
     }
   };
+
+  const handlePaste: EventListener = (e: Event) => {
+    const clipboardEvent = e as ClipboardEvent;
+    const items = clipboardEvent.clipboardData?.items;
+  
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+  
+        if (item.type.indexOf('image') !== -1) {
+          const blob = item.getAsFile();
+          if (blob) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              const base64Image = reader.result as string;
+              setImages((prevImages) => [...prevImages, base64Image]);
+            };
+            reader.readAsDataURL(blob);
+          }
+        } else if (item.type === 'text/plain') {
+          item.getAsString((text) => {
+            // Handle pasted text if needed
+          });
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (textareaRef && textareaRef.current) {
+      textareaRef.current.addEventListener('paste', handlePaste);
+
+      return () => {
+        textareaRef.current?.removeEventListener('paste', handlePaste);
+      };
+    }
+  }, [textareaRef]);
 
   useEffect(() => {
     if (promptListRef.current) {
