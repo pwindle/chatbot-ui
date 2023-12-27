@@ -97,6 +97,10 @@ export const Chatbar = () => {
   const handleExportData = () => {
     exportData();
   };
+  
+  const handleLogout = () => {
+    exportData();
+  };
 
   const handleImportConversations = (data: SupportedExportFormats) => {
     const { history, folders, prompts }: LatestExportFormat = importData(data);
@@ -217,6 +221,7 @@ export const Chatbar = () => {
         handlePluginKeyChange,
         handleClearPluginKey,
         handleApiKeyChange,
+        handleLogout,
       }}
     >
       <Sidebar<Conversation>

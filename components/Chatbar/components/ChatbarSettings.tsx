@@ -13,6 +13,7 @@ import { SidebarButton } from '../../Sidebar/SidebarButton';
 import ChatbarContext from '../Chatbar.context';
 import { ClearConversations } from './ClearConversations';
 import { PluginKeys } from './PluginKeys';
+import { Logout } from './Logout';
 
 export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
@@ -34,6 +35,7 @@ export const ChatbarSettings = () => {
     handleImportConversations,
     handleExportData,
     handleApiKeyChange,
+    handleLogout,
   } = useContext(ChatbarContext);
 
   return (
@@ -68,6 +70,8 @@ export const ChatbarSettings = () => {
           setIsSettingDialog(false);
         }}
       />
+      
+      <Logout onLogout={handleLogout} />
     </div>
   );
 };
