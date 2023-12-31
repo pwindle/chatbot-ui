@@ -73,7 +73,7 @@ function logoutProcedure() {
                 // the reason we use "random" value for password is 
                 // that browsers cache requests. changing
                 // password effectively behaves like cache-busting.
-                x.open("HEAD", location.href, true, "logout_asiduhasiduhasiud" + (new Date()).getTime().toString(), "logout_dh9238dh9238" + (new Date()).getTime().toString())
+                x.open("HEAD", location.href, true, "#@^%&_35f3a2fc-c172-480f-86c1-d896d9a9a0fc" + self.crypto.randomUUID() + (new Date()).getTime().toString(), "#@^%&_309481b9-6662-46eb-b627-69df798ca6a7" + (new Date()).getTime().toString())
                 x.send("")
                 // x.abort()
                 return 1 // this is **speculative** "We are done." 
