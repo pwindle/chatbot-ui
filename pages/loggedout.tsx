@@ -24,38 +24,6 @@ const LoggedOutPage: FC = () => {
 
 
 function logoutProcedure() {
-//  const username = "#@^%&_35f3a2fc-c172-480f-86c1-d896d9a9a0fc" + self.crypto.randomUUID() + (new Date()).getTime().toString();
-//  const password = self.crypto.randomUUID();
-//  
-//  const headers = new Headers({
-//    'Authorization': 'Restricted',
-//  });
-//  
-//  const credentials = `${username}:${password}`;
-//  const encodedCredentials = btoa(credentials);
-//  
-//  headers.set('Authorization', `Restricted ${encodedCredentials}`);
-//
-//  fetch(location.href, {
-//    method: "GET",
-//    headers: {
-//      "Authorization": "Restricted",
-//    },
-//    credentials: "include",
-//  })
-//    .then(response => {
-//      if (!response.ok) {
-//        if (response.status === 401) {
-//          window.location.href = "/loggedout";
-//        } else {
-//          console.error("Error:", response.status);
-//        }
-//      }
-//    })
-//    .catch(error => {
-//      console.error("Fetch error:", error);
-//    });
-
     var outcome
     var u
     var m = "You should be logged out now.";
