@@ -15,3 +15,11 @@ pm2 start --name=YOUR_WEBSITE_NAME_HERE npm -- start
 
 Helpful when your pm2 inevitably crashes:
 pm2 log --lines 1000
+
+
+
+
+
+for chatbot-ui version 2.0 with supabase:
+do the same as above for nvm and npm
+npx supabase start
